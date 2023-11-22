@@ -2,7 +2,17 @@ import { WebPlugin } from '@capacitor/core';
 import type { LiveQuery, Subscription } from '@dittolive/ditto';
 import { Ditto, init } from '@dittolive/ditto';
 
-import type { CallbackId, CancelSubscriptionOptions, CapacitorDittoPlugin, InitOptions, ObserveCallback, StartLiveQueryOptions, StopLiveQueryOptions, SubscribeOptions, UpsertOptions } from './definitions';
+import type {
+  CallbackId,
+  CancelSubscriptionOptions,
+  CapacitorDittoPlugin,
+  InitOptions,
+  ObserveCallback,
+  StartLiveQueryOptions,
+  StopLiveQueryOptions,
+  SubscribeOptions,
+  UpsertOptions,
+} from './definitions';
 
 export class NoDittoError extends Error {
   constructor() {
@@ -11,10 +21,7 @@ export class NoDittoError extends Error {
   }
 }
 
-export class CapacitorDittoPluginWeb
-  extends WebPlugin
-  implements CapacitorDittoPlugin
-{
+export class CapacitorDittoPluginWeb extends WebPlugin implements CapacitorDittoPlugin {
   private ditto?: Ditto;
   private readonly subscriptions: Map<string, Subscription> = new Map();
   private readonly liveQueries: Map<string, LiveQuery> = new Map();
@@ -26,7 +33,7 @@ export class CapacitorDittoPluginWeb
     this.ditto = new Ditto(options?.identity);
   }
 
-  isInitialized(): Promise<{ isInitialized: boolean; }> {
+  isInitialized(): Promise<{ isInitialized: boolean }> {
     return Promise.resolve({ isInitialized: this.ditto !== undefined });
   }
 
@@ -40,14 +47,14 @@ export class CapacitorDittoPluginWeb
     }
 
     const { collectionName, data } = options;
-  
+
     const collection = this.ditto.store.collection(collectionName);
     const documentId = await collection.upsert(data);
 
     return { documentId: documentId.toString() };
   }
 
-  subscribe(options: SubscribeOptions): Promise<{ subscriptionId: string; }> {
+  subscribe(options: SubscribeOptions): Promise<{ subscriptionId: string }> {
     if (this.ditto === undefined) {
       return Promise.reject(new NoDittoError());
     }
@@ -109,7 +116,7 @@ export class CapacitorDittoPluginWeb
     }
 
     const liveQuery = operation.observeLocal((messages, _evt) => {
-      const mappedMessages = messages.map((msg => msg.value as T));
+      const mappedMessages = messages.map((msg) => msg.value as T);
       callback({ docs: mappedMessages });
     });
 

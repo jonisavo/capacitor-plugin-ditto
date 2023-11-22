@@ -2,6 +2,8 @@
 
 Use Ditto's native APIs inside your Capacitor app.
 
+**NOTE**: This plugin is an extremely early work in progress. Most basic operations are supported on Android. No functionality exists for iOS yet.
+
 ## Install
 
 ```bash
@@ -378,7 +380,9 @@ can be serialized via CBOR.
 
 Construct a type with a set of properties K of type T
 
-<code>{ [P in K]: T; }</code>
+<code>{
+ [P in K]: T;
+ }</code>
 
 
 #### UpsertOptions

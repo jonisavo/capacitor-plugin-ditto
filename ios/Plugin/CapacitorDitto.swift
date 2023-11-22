@@ -16,10 +16,6 @@ private let ONLINE_PLAYGROUND = "onlinePlayground"
             
         return switch type as? String {
         case ONLINE_PLAYGROUND:
-            // val appId = obj.getString("appID", null) ?: return null
-            // val token = obj.getString("token", null) ?: return null
-            // val enableDittoCloudSync = obj.getBoolean("enableDittoCloudSync", true) ?: true
-            // val customAuthUrl = obj.getString("customAuthUrl", null)
             let appId = identityObj["appId"] as? String
             let token = identityObj["token"] as? String
             let enableDittoCloudSync = identityObj["enableDittoCloudSync"] as? Bool ?? true

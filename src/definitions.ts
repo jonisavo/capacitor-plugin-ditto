@@ -1,4 +1,10 @@
-import type { DocumentValue, Identity, QueryArguments, SortDirection, InitOptions as WebInitOptions } from "@dittolive/ditto";
+import type {
+  DocumentValue,
+  Identity,
+  QueryArguments,
+  SortDirection,
+  InitOptions as WebInitOptions,
+} from '@dittolive/ditto';
 
 export interface InitOptions {
   web?: WebInitOptions;
@@ -26,7 +32,7 @@ export interface StartLiveQueryOptions {
   queryString: string;
   queryArgs?: QueryArguments;
   limit?: number;
-  sort?: { propertyPath: string; sortDirection?: SortDirection }
+  sort?: { propertyPath: string; sortDirection?: SortDirection };
 }
 
 export interface StopLiveQueryOptions {
@@ -34,12 +40,12 @@ export interface StopLiveQueryOptions {
 }
 
 export type CallbackId = string;
-type ObserveEvent<T> = { docs: T[] }
+type ObserveEvent<T> = { docs: T[] };
 export type ObserveCallback<T = any> = (evt: ObserveEvent<T>) => void;
 
 export interface CapacitorDittoPlugin {
   init(options?: InitOptions): Promise<void>;
-  isInitialized(): Promise<{ isInitialized: boolean }>
+  isInitialized(): Promise<{ isInitialized: boolean }>;
   checkDittoPermissions(): Promise<void>;
   startSync(): Promise<void>;
   stopSync(): Promise<void>;
